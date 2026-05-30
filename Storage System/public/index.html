@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HD For Printing</title>
+<link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="ls">
+  <div id="ls-bg"></div><div id="ls-ov"></div>
+  <div class="lbox">
+    <div class="lhd"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 85'%3E%3Ctext x='8' y='68' font-family='Georgia,serif' font-size='74' font-style='italic' font-weight='900' fill='%23F8A119' stroke='%23FEFEFE' stroke-width='3' paint-order='stroke'%3EHd%3C/text%3E%3Ctext x='100' y='54' font-family='Georgia,serif' font-size='19' font-style='italic' fill='%23FEFEFE'%3EFor Printing%3C/text%3E%3C/svg%3E" alt="HD"/></div>
+    <div class="lcard">
+      <div class="ltitle" id="l-title">أهلاً بك 👋</div>
+      <div class="lhint"  id="l-hint">سجّل دخولك للمتابعة</div>
+
+      <!-- LOGIN FORM -->
+      <div id="login-form">
+        <div class="lf"><label>البريد الإلكتروني</label><input id="lu" type="email" dir="ltr" style="text-align:left" placeholder="example@hd.printing.com" autocomplete="username"/></div>
+        <div class="lf"><label>كلمة المرور</label><input id="lp" type="password" placeholder="••••••" autocomplete="current-password"/></div>
+        <button class="lbtn" id="lbtn">دخول ←</button>
+        <div class="lerr" id="lerr"></div>
+        <div class="lswitch">ليس لديك حساب؟ <button id="goto-signup">إنشاء حساب جديد</button></div>
+      </div>
+
+      <!-- SIGNUP FORM -->
+      <div id="signup-form" style="display:none">
+        <div class="lf"><label>الاسم الكامل *</label><input id="su-name" placeholder="محمد أحمد"/></div>
+        <div class="lf"><label>البريد الإلكتروني *</label><input id="su-email" type="email" dir="ltr" style="text-align:left" placeholder="example@hd.printing.com"/></div>
+        <div class="lf"><label>كلمة المرور *</label><input id="su-pw" type="password" placeholder="••••••"/></div>
+        <div class="lf"><label>تأكيد كلمة المرور *</label><input id="su-pw2" type="password" placeholder="••••••"/></div>
+        <div class="lf"><label>الدور الوظيفي *</label>
+          <select id="su-role">
+            <option value="">— اختر الدور —</option>
+            <option value="super">سوبر أدمن</option>
+            <option value="admin">أدمن</option>
+            <option value="printing">المطبعة</option>
+            <option value="storage">المخزن</option>
+          </select>
+        </div>
+        <button class="lbtn" id="su-btn">إنشاء الحساب ←</button>
+        <div class="lerr" id="su-err"></div>
+        <div class="lswitch"><button id="goto-login">← العودة لتسجيل الدخول</button></div>
+      </div>
+    </div>
+    <div class="lfooter">حقوق الطبع والنشر© لـ HD for printing 2025 · كل الحقوق محفوظة.</div>
+  </div>
+</div>
+
+<!-- APP -->
+<div id="app">
+  <nav class="nav">
+    <div class="nav-logo"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 85'%3E%3Ctext x='8' y='68' font-family='Georgia,serif' font-size='74' font-style='italic' font-weight='900' fill='%23F8A119' stroke='%23FEFEFE' stroke-width='3' paint-order='stroke'%3EHd%3C/text%3E%3Ctext x='100' y='54' font-family='Georgia,serif' font-size='19' font-style='italic' fill='%23FEFEFE'%3EFor Printing%3C/text%3E%3C/svg%3E" alt="HD"/></div>
+    <div class="nav-tabs" id="ntabs"></div>
+    <div class="nav-r">
+      <div class="sync-pill"><div class="sdot" id="sdot"></div><span style="font-size:11px;color:#888;font-weight:700" id="slbl">متصل</span></div>
+      <div style="display:flex;flex-direction:column;align-items:flex-end"><span style="font-size:13px;font-weight:900;color:var(--wht)" id="nuname"></span><span style="font-size:10px;color:#888;font-weight:600" id="nurole"></span></div>
+      <div class="nav-av" id="navav"></div>
+      <button class="out-btn" id="obtn">خروج</button>
+    </div>
+  </nav>
+  <div class="body-wrap">
+
+    <!-- ORDERS -->
+    <div class="pg" id="pg-orders" style="flex:1;display:none">
+      <div class="sidebar" id="ord-sb"><div class="sidebar-inner"><div class="sb-title">ملخص الأوامر</div><div class="sb-stat-grid" id="sb-stats"></div><div class="sb-div"></div><div class="sb-title">الأوامر النشطة</div><div id="sb-list"></div></div></div>
+      <div class="main-area">
+        <div class="ph"><div class="ph-l"><div class="pt">📋 أوامر الشغل</div></div><div class="ph-r"><button class="btn bg" id="new-btn">＋ أمر جديد</button><div class="sb-toggle" id="ord-sb-toggle"><span></span><span></span><span></span></div></div></div>
+        <div id="ord-detail" style="display:none"></div>
+        <div id="ord-grid-view">
+          <div class="sec-block"><div class="sec-hdr"><span class="sec-title">🖨 قيد الطباعة</span><span class="sec-cnt" id="cnt-pr" style="background:var(--blu-bg);color:var(--blu)">0</span></div><div class="orders-grid" id="grid-pr"></div></div>
+          <div class="sec-block"><div class="sec-hdr"><span class="sec-title">⏳ في الانتظار</span><span class="sec-cnt" id="cnt-pe" style="background:var(--ora-bg);color:var(--ora-d)">0</span></div><div class="orders-grid" id="grid-pe"></div></div>
+          <div class="sec-block"><div class="sec-hdr"><span class="sec-title">✅ مكتملة</span><span class="sec-cnt" id="cnt-do" style="background:var(--grn-bg);color:var(--grn)">0</span><button class="btn bo sm" id="done-tog" style="margin-right:auto">عرض</button></div><div class="orders-grid" id="grid-do" style="display:none"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FORM -->
+    <div class="pg" id="pg-form" style="flex:1;display:none">
+      <div class="main-area"><div class="fw">
+        <div class="ph"><div class="ph-l"><div class="pt">📝 أمر شغل جديد</div></div><div class="ph-r" style="flex-direction:column;align-items:flex-end"><div style="font-size:12px;font-weight:800;color:var(--tx3)" id="fnum"></div><div style="font-size:11px;color:var(--tx4)" id="fdate"></div></div></div>
+        <div class="fc"><div class="fct">👤 بيانات العميل</div><div class="fg"><div class="fi full"><label>اسم العميل *</label><input id="f-cl" placeholder="اسم العميل…"/></div></div></div>
+        <div class="fc"><div class="fct">⚙️ العمليات المطلوبة</div><div id="ops-list"></div><button class="btn bo sm" id="add-op">＋ عملية</button></div>
+        <div class="fc"><div class="fct">📄 المواد والورق</div><div id="paper-list"></div><button class="btn bo sm" id="add-pa">＋ مادة</button><div id="deduct-prev"></div></div>
+        <div class="fc"><div class="fct">📐 مواصفات الطباعة</div>
+          <div class="fg3">
+            <div class="fi"><label>عدد الأفرخ</label><input id="f-sh" type="number" min="0" placeholder="0"/></div>
+            <div class="fi"><label>عدد السحبات</label><input id="f-pu" placeholder="0"/></div>
+            <div class="fi"><label>مقاس الورق</label><input id="f-sz" placeholder="A4 / 70×100"/></div>
+            <div class="fi"><label>الألوان</label><input id="f-co" placeholder="4 ألوان"/></div>
+            <div class="fi"><label>CTP</label><input id="f-ct" placeholder="تفاصيل CTP"/></div>
+            <div class="fi"><label>المطبعة</label><input id="f-pr" placeholder="اسم المطبعة"/></div>
+          </div>
+        </div>
+        <div class="fc"><div class="fct">✂️ خدمات التشطيب</div><div id="tash-grid"></div></div>
+        <div class="fc"><div class="fct">📝 ملاحظات</div><div class="fi"><textarea id="f-no" rows="2" placeholder="ملاحظات إضافية…"></textarea></div></div>
+        <div class="ff"><button class="btn bg" id="sub-btn">📤 إرسال للمطبعة</button><button class="btn bo" id="can-btn">إلغاء</button></div>
+      </div></div>
+    </div>
+
+    <!-- PRINTING -->
+    <div class="pg" id="pg-printing" style="flex:1;display:none">
+      <div class="sidebar" id="pr-sb"><div class="sidebar-inner"><div class="sb-title">المطبعة — ملخص</div><div class="sb-stat-grid" id="pr-sb-stats"></div><div class="sb-div"></div><div class="sb-title">قيد التنفيذ</div><div id="pr-sb-active"></div><div class="sb-div"></div><div class="sb-title">في الانتظار</div><div id="pr-sb-pending"></div></div></div>
+      <div class="main-area">
+        <div class="ph"><div class="ph-l"><div class="pt">🖨 واجهة المطبعة</div><span class="badge bpr">عرض المطبعة</span></div><div class="ph-r"><div class="sb-toggle" id="pr-sb-toggle"><span></span><span></span><span></span></div></div></div>
+        <div id="pr-detail" style="display:none"></div>
+        <div id="pr-grid-view">
+          <div class="sec-block"><div class="sec-hdr"><span class="sec-title">🖨 قيد التنفيذ</span><span class="sec-cnt" id="cnt-pra" style="background:var(--blu-bg);color:var(--blu)">0</span></div><div class="orders-grid" id="pgrid-pr"></div></div>
+          <div class="sec-block"><div class="sec-hdr"><span class="sec-title">⏳ في الانتظار</span><span class="sec-cnt" id="cnt-prp" style="background:var(--ora-bg);color:var(--ora-d)">0</span></div><div class="orders-grid" id="pgrid-pe"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STORAGE -->
+    <div class="pg" id="pg-storage" style="flex:1;display:none">
+      <div class="main-area">
+        <div class="ph"><div class="ph-l"><div class="pt">📦 المخزن</div></div><div class="ph-r"><div class="s-wrap"><input id="s-search" placeholder="ابحث عن صنف، مواصفة…"/></div><button class="btn bg" id="add-cat-btn">＋ قسم جديد</button></div></div>
+        <div class="skr" id="skpi"></div>
+        <div id="cat-grid-view"><div class="cat-grid" id="cat-grid"></div></div>
+        <div class="cat-detail" id="cat-detail"></div>
+      </div>
+    </div>
+
+    <!-- DASHBOARD -->
+    <div class="pg" id="pg-dashboard" style="flex:1;display:none">
+      <div class="main-area">
+        <div class="ph"><div class="ph-l"><div class="pt">📊 لوحة التحكم</div></div></div>
+        <div class="dkr" id="dkpis"></div>
+        <div id="dg-clients"></div>
+        <div id="dg-active-orders"></div>
+        <div id="dg-activity-log"></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- MODAL: Category -->
+<div class="mo" id="m-cat"><div class="mb">
+  <div class="mti">➕ إضافة قسم جديد</div><div class="msb">قسم جديد لتنظيم المخزن</div>
+  <div class="mf"><label>اسم القسم *</label><input id="mc-name" placeholder="مثال: الأحبار…"/></div>
+  <div class="mf"><label>الأيقونة</label><div class="ig" id="ico-grid"></div></div>
+  <div class="mf"><label>اللون</label><div class="cc2">
+    <div class="ci on" style="background:#D71920" data-c="#D71920"></div>
+    <div class="ci" style="background:#F8A119" data-c="#F8A119"></div>
+    <div class="ci" style="background:#1A4A7A" data-c="#1A4A7A"></div>
+    <div class="ci" style="background:#1A7A3A" data-c="#1A7A3A"></div>
+    <div class="ci" style="background:#7A3A7A" data-c="#7A3A7A"></div>
+    <div class="ci" style="background:#2E6B7A" data-c="#2E6B7A"></div>
+    <div class="ci" style="background:#7A5A1A" data-c="#7A5A1A"></div>
+    <div class="ci" style="background:#1A1A1A" data-c="#1A1A1A"></div>
+    <div class="ci" style="background:#5A1A7A" data-c="#5A1A7A"></div>
+  </div></div>
+  <div class="ma"><button class="btn bg" id="conf-cat">إضافة</button><button class="btn bo" id="cls-cat">إلغاء</button></div>
+</div></div>
+
+<!-- MODAL: Qty -->
+<div class="mo" id="m-qty"><div class="mb">
+  <div class="mti" id="mq-ti">تعديل الكمية</div><div class="msb" id="mq-sb"></div>
+  <div class="qmb"><div class="qm" id="qm-add">➕ إضافة</div><div class="qm" id="qm-sub">➖ خصم</div><div class="qm" id="qm-set">🔢 تعيين</div></div>
+  <div class="mf"><label id="mq-lbl">الكمية</label><input id="mq-q" type="number" min="0" placeholder="0"/></div>
+  <div class="qp"><span>الحالي: <strong id="mq-c">—</strong></span><span style="color:var(--tx3)">→</span><span>بعد التعديل: <strong id="mq-n" style="color:var(--ora-d)">—</strong></span></div>
+  <div class="mf" style="margin-top:9px"><label>السبب (اختياري)</label><input id="mq-r" placeholder="مثال: استلام بضاعة جديدة…"/></div>
+  <div class="ma"><button class="btn bg" id="conf-qty">✓ تأكيد</button><button class="btn bo" id="cls-qty">إلغاء</button></div>
+</div></div>
+
+<div class="toast" id="toast"></div>
+
+<!-- Firebase Compat SDK -->
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
